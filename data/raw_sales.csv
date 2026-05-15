@@ -1,0 +1,7 @@
+date,product_id,quantity,price,region
+2026-01-01,P101,10,500,North
+2026-01-02,P102,,300,South
+2026-01-03,P103,5,,East
+2026-01-03,P103,5,,East
+2026/01/04,P104,7,450,West
+invalid_date,P105,8,600,North
