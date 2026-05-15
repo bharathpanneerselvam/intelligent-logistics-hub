@@ -1,0 +1,26 @@
+# Java
+target/
+*.class
+
+# Python
+venv/
+__pycache__/
+*.h5
+*.pkl
+
+# Node
+node_modules/
+dist/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Env
+.env
