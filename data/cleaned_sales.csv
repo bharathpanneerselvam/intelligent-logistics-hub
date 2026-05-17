@@ -1,0 +1,5 @@
+date,product_id,quantity,price,region,normalized_price
+2026-01-01,P101,10,500.0,North,1.0
+2026-01-02,P102,7,300.0,South,0.0
+2026-01-03,P103,5,475.0,East,0.875
+2026-01-04,P104,7,450.0,West,0.75
