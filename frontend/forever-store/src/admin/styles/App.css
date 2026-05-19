@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=Outfit:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark:        #2d2d2d;
+  --mid:         #555555;
+  --light:       #888888;
+  --border:      #e8e8e8;
+  --white:       #ffffff;
+  --bg:          #f7f7f5;
+  --pink:        #e8a0a0;
+  --pink-light:  #f4cfc9;
+  --pink-bg:     #fdf4f4;
+  --green:       #2e7d32;
+  --green-bg:    #e8f5e9;
+  --red:         #c62828;
+  --red-bg:      #fce4ec;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--dark);
+  background: var(--bg);
+}
+
+/* admin shell */
+.app-container {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  min-height: 100vh;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.page-content {
+  padding: 36px 40px;
+  flex: 1;
+}

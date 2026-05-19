@@ -1,0 +1,148 @@
+.forecast-page h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.forecast-page .page-sub {
+  font-size: 13px;
+  color: var(--light);
+  font-weight: 300;
+  margin-bottom: 28px;
+}
+
+/* input card */
+.forecast-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.forecast-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 18px;
+}
+
+/* 10 input grid */
+.forecast-form {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.forecast-form input {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'Outfit', sans-serif;
+  color: var(--dark);
+  outline: none;
+  background: white;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.forecast-form input::placeholder {
+  color: #cccccc;
+  font-size: 12px;
+}
+
+.forecast-form input:focus {
+  border-color: var(--dark);
+}
+
+/* buttons */
+.button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.button-group button {
+  padding: 11px 28px;
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button-group button:first-child {
+  background: var(--dark);
+  color: white;
+}
+
+.button-group button:first-child:hover {
+  background: #444;
+}
+
+.button-group button:first-child:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.reset-btn {
+  background: transparent !important;
+  color: var(--mid) !important;
+  border: 1px solid var(--border) !important;
+}
+
+.reset-btn:hover {
+  background: var(--bg) !important;
+  color: var(--dark) !important;
+}
+
+/* feedback */
+.loading-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--light);
+  font-weight: 300;
+}
+
+.error-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--red);
+  background: var(--red-bg);
+  border: 1px solid #f5c6c2;
+  padding: 10px 14px;
+}
+
+/* result */
+.result-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--pink);
+  padding: 24px 28px;
+  margin-top: 20px;
+}
+
+.result-card h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 10px;
+}
+
+.result-card .result-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--dark);
+  line-height: 1;
+}

@@ -1,0 +1,112 @@
+.collection {
+  padding: 20px 5%;
+}
+
+.collection-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.collection-header h1 {
+  font-size: 42px;
+}
+
+.collection-header p {
+  color: #666;
+}
+
+.collection-filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.filter-group select {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 180px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+
+.collection-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.collection-card:hover {
+  transform: translateY(-5px);
+}
+
+.collection-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.collection-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+.collection-cart-btn {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: black;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  border-radius: 6px;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.collection-image-wrap:hover .collection-cart-btn {
+  opacity: 1;
+}
+
+.collection-info {
+  padding: 14px 6px;
+}
+
+.collection-name {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.collection-category {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.collection-price {
+  font-weight: bold;
+  font-size: 18px;
+}

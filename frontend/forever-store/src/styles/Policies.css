@@ -1,0 +1,34 @@
+.policies {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 56px 48px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  gap: 24px;
+}
+
+.policy-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 32px;
+}
+
+.policy-icon {
+  color: var(--mid);
+  margin-bottom: 14px;
+}
+
+.policy-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+
+.policy-desc {
+  font-size: 13px;
+  color: var(--light);
+  font-weight: 300;
+}
