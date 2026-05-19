@@ -1,13 +1,7 @@
 package com.logistics.backend_service.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -16,10 +10,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private String role;
+    @Column(nullable = false)
+    private String role = "USER";
+
+    public User() {}
+
+    public Long getId()       { return id; }
+    public String getEmail()  { return email; }
+    public String getPassword() { return password; }
+    public String getRole()   { return role; }
+
+    public void setId(Long id)           { this.id = id; }
+    public void setEmail(String email)   { this.email = email; }
+    public void setPassword(String pwd)  { this.password = pwd; }
+    public void setRole(String role)     { this.role = role; }
 }

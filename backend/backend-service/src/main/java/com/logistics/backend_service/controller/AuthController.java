@@ -6,13 +6,15 @@ import com.logistics.backend_service.model.User;
 import com.logistics.backend_service.repository.UserRepository;
 import com.logistics.backend_service.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
 public class AuthController {
 
     @Autowired
@@ -25,30 +27,38 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public String register(@RequestBody User user) {
-
+    public ResponseEntity<?> register(@RequestBody User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Email already registered");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        return "User registered successfully!";
+
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @PostMapping("/login")
-    public AuthResponse login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
 
         if (userOpt.isEmpty()) {
-            throw new RuntimeException("User not found");
+
+            return ResponseEntity.status(401).body("User not found");
         }
 
         User user = userOpt.get();
 
-        boolean passwordMatches = passwordEncoder.matches(request.getPassword(), user.getPassword());
+        boolean passwordMatches = passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword()
+        );
 
         if (!passwordMatches) {
-            throw new RuntimeException("Wrong password");
+            return ResponseEntity.status(401).body("Wrong password");
         }
 
+
         String token = jwtUtil.generateToken(user.getEmail());
-        return new AuthResponse(token, user.getEmail());
+        return ResponseEntity.ok(new AuthResponse(token, user.getEmail(), user.getRole()));
     }
 }

@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
-            String token = authHeader.substring(7); // remove "Bearer " prefix
+            String token = authHeader.substring(7);
 
             if (jwtUtil.isTokenValid(token)) {
                 String email = jwtUtil.getEmailFromToken(token);
