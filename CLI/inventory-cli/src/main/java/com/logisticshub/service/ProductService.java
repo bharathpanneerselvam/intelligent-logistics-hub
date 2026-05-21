@@ -1,67 +1,179 @@
 package com.logisticshub.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.logisticshub.model.Product;
-import com.logisticshub.repository.ProductRepository;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 public class ProductService {
 
-    private final ProductRepository repository;
+    private static final String BASE_URL =
+            "http://localhost:8080/api/products";
 
-    private final List<Product> products;
+    private final HttpClient client =
+            HttpClient.newHttpClient();
 
-    public ProductService() {
-
-        repository = new ProductRepository();
-
-        products = repository.loadProducts();
-    }
+    private final ObjectMapper mapper =
+            new ObjectMapper();
 
     public void addProduct(Product product) {
 
-        products.add(product);
+        try {
 
-        repository.saveProducts(products);
+            String json =
+                    mapper.writeValueAsString(product);
 
-        System.out.println("Product Added");
+            HttpRequest request =
+                    HttpRequest.newBuilder()
+                            .uri(URI.create(BASE_URL))
+                            .header("Content-Type",
+                                    "application/json")
+                            .POST(HttpRequest.BodyPublishers
+                                    .ofString(json))
+                            .build();
+
+            HttpResponse<String> response =
+                    client.send(
+                            request,
+                            HttpResponse.BodyHandlers
+                                    .ofString()
+                    );
+
+            System.out.println("\nProduct Added");
+            System.out.println(response.body());
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Error adding product"
+            );
+        }
     }
 
     public void viewProducts() {
 
-        if (products.isEmpty()) {
-            System.out.println("Inventory Empty");
-            return;
-        }
+        try {
 
-        for (Product product : products) {
-            System.out.println(product);
-        }
-    }
+            HttpRequest request =
+                    HttpRequest.newBuilder()
+                            .uri(URI.create(BASE_URL))
+                            .GET()
+                            .build();
 
-    public void deleteProduct(int id) {
+            HttpResponse<String> response =
+                    client.send(
+                            request,
+                            HttpResponse.BodyHandlers
+                                    .ofString()
+                    );
 
-        products.removeIf(product -> product.getId()==id);
+            List<Product> products =
+                    mapper.readValue(
+                            response.body(),
+                            new TypeReference<List<Product>>() {}
+                    );
 
-        repository.saveProducts(products);
+            System.out.println("\n===== PRODUCTS =====");
 
-        System.out.println("Product Deleted");
-    }
-
-    public void updateQuantity(int id, int quantity) {
-
-        for (Product product : products) {
-
-            if (product.getId() == id) {
-
-                product.setQuantity(quantity);
-                repository.saveProducts(products);
-                System.out.println("Quantity Updated");
-
-                return;
+            for (Product p : products) {
+                System.out.println(p);
             }
-        }
 
-        System.out.println("Product Not Found");
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Error fetching products"
+            );
+        }
+    }
+
+    
+    public void updateProduct(Long id,
+                              Product product) {
+
+        try {
+
+            String json =
+                    mapper.writeValueAsString(product);
+
+            HttpRequest request =
+                    HttpRequest.newBuilder()
+                            .uri(URI.create(
+                                    BASE_URL + "/" + id
+                            ))
+                            .header(
+                                    "Content-Type",
+                                    "application/json"
+                            )
+                            .PUT(
+                                    HttpRequest
+                                            .BodyPublishers
+                                            .ofString(json)
+                            )
+                            .build();
+
+            HttpResponse<String> response =
+                    client.send(
+                            request,
+                            HttpResponse.BodyHandlers
+                                    .ofString()
+                    );
+
+            System.out.println(
+                    "\nProduct Updated"
+            );
+
+            System.out.println(
+                    response.body()
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Error updating product"
+            );
+        }
+    }
+
+    public void deleteProduct(Long id) {
+
+        try {
+
+            HttpRequest request =
+                    HttpRequest.newBuilder()
+                            .uri(URI.create(
+                                    BASE_URL + "/" + id
+                            ))
+                            .DELETE()
+                            .build();
+
+            HttpResponse<String> response =
+                    client.send(
+                            request,
+                            HttpResponse.BodyHandlers
+                                    .ofString()
+                    );
+
+            System.out.println(
+                    "\nProduct Deleted"
+            );
+
+            System.out.println(
+                    response.body()
+            );
+
+        } catch (IOException |
+                 InterruptedException e) {
+
+            System.out.println(
+                    "Error deleting product"
+            );
+        }
     }
 }

@@ -7,25 +7,48 @@ import java.util.Scanner;
 
 public class InventoryCLI {
 
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner =
+            new Scanner(System.in);
 
-    private final ProductService service = new ProductService();
+    private final ProductService service =
+            new ProductService();
 
     public void start() {
 
         while (true) {
 
-            System.out.println("\n===== INVENTORY MENU =====");
+            System.out.println(
+                    "\n===== INVENTORY MENU ====="
+            );
 
-            System.out.println("1. Add Product");
-            System.out.println("2. View Products");
-            System.out.println("3. Update Quantity");
-            System.out.println("4. Delete Product");
-            System.out.println("5. Exit");
+            System.out.println(
+                    "1. Add Product"
+            );
 
-            System.out.print("Choose Option: ");
+            System.out.println(
+                    "2. View Products"
+            );
 
-            int choice = scanner.nextInt();
+            System.out.println(
+                    "3. Update Product"
+            );
+
+            System.out.println(
+                    "4. Delete Product"
+            );
+
+            System.out.println(
+                    "5. Exit"
+            );
+
+            System.out.print(
+                    "Choose Option: "
+            );
+
+            int choice =
+                    scanner.nextInt();
+
+            scanner.nextLine();
 
             switch (choice) {
 
@@ -38,7 +61,7 @@ public class InventoryCLI {
                     break;
 
                 case 3:
-                    updateQuantity();
+                    updateProduct();
                     break;
 
                 case 4:
@@ -46,56 +69,119 @@ public class InventoryCLI {
                     break;
 
                 case 5:
-                    System.out.println("Exiting...");
+                    System.out.println(
+                            "Exiting..."
+                    );
                     return;
 
                 default:
-                    System.out.println("Invalid Option");
+                    System.out.println(
+                            "Invalid Option"
+                    );
             }
         }
     }
 
     private void addProduct() {
 
-        System.out.print("Enter Product ID: ");
-        int id = scanner.nextInt();
+        System.out.print("Name: ");
+        String name =
+                scanner.nextLine();
+
+        System.out.print("Category: ");
+        String category =
+                scanner.nextLine();
+
+        System.out.print("Price: ");
+        double price =
+                scanner.nextDouble();
+
+        System.out.print(
+                "Bestseller (true/false): "
+        );
+
+        boolean bestseller =
+                scanner.nextBoolean();
 
         scanner.nextLine();
 
-        System.out.print("Enter Product Name: ");
-        String name = scanner.nextLine();
+        System.out.print("Image URL: ");
+        String image =
+                scanner.nextLine();
 
-        System.out.print("Enter Quantity: ");
-        int quantity = scanner.nextInt();
-
-        System.out.print("Enter Price: ");
-        double price = scanner.nextDouble();
-
-        Product product = new Product(
-                id,
-                name,
-                quantity,
-                price
-        );
+        Product product =
+                new Product(
+                        null,
+                        name,
+                        category,
+                        price,
+                        bestseller,
+                        image
+                );
 
         service.addProduct(product);
     }
 
-    private void updateQuantity() {
+    private void updateProduct() {
 
-        System.out.print("Enter Product ID: ");
-        int id = scanner.nextInt();
+        System.out.print(
+                "Enter Product ID: "
+        );
 
-        System.out.print("Enter New Quantity: ");
-        int quantity = scanner.nextInt();
+        Long id =
+                scanner.nextLong();
 
-        service.updateQuantity(id, quantity);
+        scanner.nextLine();
+
+        System.out.print("Name: ");
+        String name =
+                scanner.nextLine();
+
+        System.out.print("Category: ");
+        String category =
+                scanner.nextLine();
+
+        System.out.print("Price: ");
+        double price =
+                scanner.nextDouble();
+
+        System.out.print(
+                "Bestseller (true/false): "
+        );
+
+        boolean bestseller =
+                scanner.nextBoolean();
+
+        scanner.nextLine();
+
+        System.out.print("Image URL: ");
+        String image =
+                scanner.nextLine();
+
+        Product product =
+                new Product(
+                        id,
+                        name,
+                        category,
+                        price,
+                        bestseller,
+                        image
+                );
+
+        service.updateProduct(
+                id,
+                product
+        );
     }
 
     private void deleteProduct() {
 
-        System.out.print("Enter Product ID: ");
-        int id = scanner.nextInt();
+        System.out.print(
+                "Enter Product ID: "
+        );
+
+        Long id =
+                scanner.nextLong();
 
         service.deleteProduct(id);
     }
