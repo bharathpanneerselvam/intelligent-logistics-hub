@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="AdminUITestSuite">
+
+    <test name="AdminTests">
+
+        <classes>
+
+            <class name="com.adminui.testing.tests.AdminLoginTest"/>
+
+            <class name="com.adminui.testing.tests.DashboardTest"/>
+
+            <class name="com.adminui.testing.tests.OrdersManagementTest"/>
+
+        </classes>
+
+    </test>
+
+</suite>
