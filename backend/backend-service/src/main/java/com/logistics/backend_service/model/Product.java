@@ -15,10 +15,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String category;
     private double price;
-    private int stock;
+    private boolean bestseller;
+    private String image;
 
 }

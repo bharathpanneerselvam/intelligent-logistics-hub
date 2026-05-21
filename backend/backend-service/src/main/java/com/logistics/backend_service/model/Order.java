@@ -18,7 +18,7 @@ public class Order {
 
     private String customerName;
     private Long productId;
-    private int quantity;
+    private int amount;
     private String status;
 
 }

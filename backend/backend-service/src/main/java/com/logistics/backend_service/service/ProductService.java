@@ -31,6 +31,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public List<Product> addManyProducts(
+            List<Product> products
+    ) {
+        return productRepository.saveAll(products);
+    }
     public Product updateProduct(Long id, Product updatedProduct) {
         Optional<Product> existing = productRepository.findById(id);
 
@@ -39,7 +44,8 @@ public class ProductService {
             p.setName(updatedProduct.getName());
             p.setCategory(updatedProduct.getCategory());
             p.setPrice(updatedProduct.getPrice());
-            p.setStock(updatedProduct.getStock());
+            p.setBestseller(updatedProduct.isBestseller());
+            p.setImage(updatedProduct.getImage());
             return productRepository.save(p);
         }
 

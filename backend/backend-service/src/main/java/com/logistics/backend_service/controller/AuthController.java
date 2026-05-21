@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:5173"})
 public class AuthController {
 
     @Autowired
@@ -31,6 +31,7 @@ public class AuthController {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return ResponseEntity.badRequest().body("Email already registered");
         }
+        
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 

@@ -35,6 +35,13 @@ public class ProductController {
         return ResponseEntity.ok(productService.addProduct(product));
     }
 
+    @PostMapping("/list")
+    public List<Product> addManyProducts(
+            @RequestBody List<Product> products
+    ) {
+        return productService.addManyProducts(products);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(@PathVariable Long id,
                                            @RequestBody Product product) {
