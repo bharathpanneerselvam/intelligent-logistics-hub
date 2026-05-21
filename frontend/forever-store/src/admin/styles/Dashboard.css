@@ -52,12 +52,6 @@
   line-height: 1;
 }
 
-/* recent orders table */
-.section-block {
-  background: var(--white);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
 
 .section-block-header {
   display: flex;
@@ -117,4 +111,76 @@
   font-weight: 500;
   padding: 3px 10px;
   border-radius: 20px;
+}
+
+/* recent orders section */
+
+.section-block {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+/* optional scrollbar styling */
+.orders-table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orders-table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.orders-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* FIXED DASHBOARD LAYOUT */
+
+.dashboard-page {
+  height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* cards stay fixed */
+.card-container {
+  flex-shrink: 0;
+}
+
+/* recent orders section */
+.section-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* fixed header */
+.section-block-header {
+  flex-shrink: 0;
+  background: white;
+  z-index: 10;
+}
+
+/* ONLY table scrolls */
+.orders-table-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* smooth scrollbar */
+.orders-table-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.orders-table-wrapper::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
 }

@@ -32,6 +32,7 @@ import "./admin/styles/Sidebar.css"
 import "./admin/styles/Dashboard.css"
 import "./admin/styles/Forecast.css"
 import "./admin/styles/Inspection.css"
+import OrdersManagement from "./admin/pages/OrdersManagement";
 
 function AdminLayout() {
   return (
@@ -44,6 +45,7 @@ function AdminLayout() {
             <Route path="/"           element={<Dashboard />} />
             <Route path="/forecast"   element={<Forecast />} />
             <Route path="/inspection" element={<Inspection />} />
+            <Route path="/orders" element={<OrdersManagement />} />
           </Routes>
         </div>
       </div>
@@ -72,10 +74,10 @@ function AppContent() {
 
   function addToCart(product) {
     setCart((prev) => {
-      const exists = prev.find((item) => item._id === product._id)
+      const exists = prev.find((item) => item.id === product.id)
       if (exists) {
         return prev.map((item) =>
-          item._id === product._id
+          item.id === product.id
             ? { ...item, qty: item.qty + 1 }
             : item
         )
@@ -85,13 +87,13 @@ function AppContent() {
   }
 
   function removeFromCart(id) {
-    setCart((prev) => prev.filter((item) => item._id !== id))
+    setCart((prev) => prev.filter((item) => item.id !== id))
   }
 
   function increaseQty(id) {
     setCart((prev) =>
       prev.map((item) =>
-        item._id === id ? { ...item, qty: item.qty + 1 } : item
+        item.id === id ? { ...item, qty: item.qty + 1 } : item
       )
     )
   }
@@ -100,7 +102,7 @@ function AppContent() {
     setCart((prev) =>
       prev
         .map((item) =>
-          item._id === id ? { ...item, qty: item.qty - 1 } : item
+          item.id === id ? { ...item, qty: item.qty - 1 } : item
         )
         .filter((item) => item.qty > 0)
     )
@@ -212,6 +214,7 @@ function AppContent() {
               increaseQty={increaseQty}
               decreaseQty={decreaseQty}
               setPage={navigate}
+              setCart={setCart}
             />
           }
         />

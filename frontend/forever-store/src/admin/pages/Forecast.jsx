@@ -3,11 +3,10 @@ import { predictSales } from "../services/api";
 import "../styles/Forecast.css";
 
 function Forecast() {
-
-  const [inputs, setInputs]   = useState(Array(10).fill(""));
-  const [result, setResult]   = useState(null);
+  const [inputs, setInputs] = useState(Array(6).fill(""));
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (index, value) => {
     const updated = [...inputs];
@@ -16,7 +15,7 @@ function Forecast() {
   };
 
   const handleReset = () => {
-    setInputs(Array(10).fill(""));
+    setInputs(Array(6).fill(""));
     setResult(null);
     setError("");
   };
@@ -24,13 +23,14 @@ function Forecast() {
   const handlePredict = async () => {
     setError("");
     setResult(null);
- 
+
     if (inputs.some((val) => val === "")) {
-      setError("Please fill all 10 fields.");
+      setError("Please fill all 6 fields.");
       return;
     }
 
     const numbers = inputs.map(Number);
+
     if (numbers.some((n) => isNaN(n))) {
       setError("All fields must be valid numbers.");
       return;
@@ -38,15 +38,17 @@ function Forecast() {
 
     try {
       setLoading(true);
- 
-      const response = await predictSales(numbers);
-      setResult(response.data.predicted_next_day_sales);
 
+      const response = await predictSales(numbers);
+
+      setResult(response.data.forecast);
     } catch (err) {
-      if (err.request) {
-        setError("Cannot reach ML service. Is Flask running on port 5000?");
+      console.error(err);
+
+      if (err.response) {
+        setError(err.response.data.error || "Prediction failed.");
       } else {
-        setError("Prediction failed. Please try again.");
+        setError("Cannot connect to ML service on port 5000.");
       }
     } finally {
       setLoading(false);
@@ -55,21 +57,21 @@ function Forecast() {
 
   return (
     <div className="forecast-page">
+      <h2>Revenue Forecast</h2>
 
-      <h2>Sales Forecast</h2>
       <p className="page-sub">
-        Enter the last 10 days of sales figures to predict the next day.
+        Enter last 6 months revenue to predict next 2 months.
       </p>
- 
+
       <div className="forecast-card">
-        <h3>Sales Data — Last 10 Days</h3>
+        <h3>Last 6 Months Revenue</h3>
 
         <div className="forecast-form">
           {inputs.map((value, index) => (
             <input
               key={index}
               type="number"
-              placeholder={`Day ${index + 1}`}
+              placeholder={`Month ${index + 1}`}
               value={value}
               onChange={(e) => handleChange(index, e.target.value)}
             />
@@ -80,22 +82,30 @@ function Forecast() {
           <button onClick={handlePredict} disabled={loading}>
             {loading ? "Predicting..." : "Predict"}
           </button>
+
           <button onClick={handleReset} className="reset-btn">
             Reset
           </button>
         </div>
       </div>
- 
-      {loading && <p className="loading-text">Calling ML model, please wait...</p>}
-      {error   && <p className="error-text">{error}</p>}
- 
-      {result !== null && !loading && (
+
+      {loading && <p className="loading-text">Calling ML model...</p>}
+
+      {error && <p className="error-text">{error}</p>}
+
+      {result && !loading && (
         <div className="result-card">
-          <h3>Predicted Next Day Sales</h3>
-          <p className="result-value">{result} units</p>
+          <h3>Forecast Results</h3>
+
+          <p className="result-value">
+            Next Month: <b>{result.next_month_revenue}</b> units
+          </p>
+
+          <p className="result-value">
+            Second Month: <b>{result.second_month_revenue}</b> units
+          </p>
         </div>
       )}
-
     </div>
   );
 }

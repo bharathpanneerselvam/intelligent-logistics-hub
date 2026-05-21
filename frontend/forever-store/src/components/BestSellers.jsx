@@ -1,15 +1,51 @@
-import { products } from "../assets/assets"
-import "../styles/BestSellers.css"
-import "../styles/ProductGrid.css"
+import { useEffect, useState } from "react";
+import { imageMap } from "../assets/assets";
+import "../styles/BestSellers.css";
+import "../styles/ProductGrid.css";
 
 function BestSellers({ addToCart }) {
 
-  const items = products.filter((item) => item.bestseller).slice(0, 5)
+  // PRODUCTS FROM BACKEND
+  const [products, setProducts] = useState([]);
+
+  // FETCH PRODUCTS
+  useEffect(() => {
+
+    const fetchProducts = async () => {
+
+      try {
+
+        const response = await fetch(
+          "http://localhost:8080/api/products"
+        );
+
+        const data = await response.json();
+
+        setProducts(data);
+
+      } catch (error) {
+
+        console.log("Error fetching products:", error);
+
+      }
+
+    };
+
+    fetchProducts();
+
+  }, []);
+
+  // FILTER BESTSELLERS
+  const items = products
+    .filter((item) => item.bestseller)
+    .slice(0, 5);
 
   return (
+
     <section className="product-section bestsellers-section">
 
       <div className="section-heading">
+
         <span className="label">BEST</span>
 
         <h2>SELLERS</h2>
@@ -18,18 +54,22 @@ function BestSellers({ addToCart }) {
           A must-have in every wardrobe, these high-waisted jeans
           offer the perfect blend of comfort and edge.
         </p>
+
       </div>
 
       <div className="product-grid-5">
 
         {items.map((product) => (
 
-          <div key={product._id} className="product-card">
+          <div
+            key={product.id}
+            className="product-card"
+          >
 
             <div className="product-image-wrap">
 
               <img
-                src={product.image[0]}
+                src={imageMap[product.image]}
                 alt={product.name}
                 className="product-image"
               />
@@ -50,7 +90,7 @@ function BestSellers({ addToCart }) {
               </p>
 
               <p className="product-price">
-                ${product.price}
+                ₹{product.price}
               </p>
 
             </div>
@@ -62,7 +102,9 @@ function BestSellers({ addToCart }) {
       </div>
 
     </section>
-  )
+
+  );
+
 }
 
-export default BestSellers
+export default BestSellers;

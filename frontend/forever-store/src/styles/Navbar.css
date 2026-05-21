@@ -66,6 +66,7 @@
 }
 
 .icon-btn:hover {
+  background: none;
   opacity: 0.6;
 }
 
@@ -227,6 +228,8 @@
 
 .account-dropdown button {
 
+  color: #222;
+
   border: none;
 
   background: transparent;
@@ -239,7 +242,7 @@
 
   cursor: pointer;
 
-  font-size: 14px;
+  font-size: 12px;
 
   transition: 0.2s;
 

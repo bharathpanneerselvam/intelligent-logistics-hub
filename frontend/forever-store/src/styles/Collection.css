@@ -58,7 +58,6 @@
 .collection-card:hover {
   transform: translateY(-5px);
 }
-
 .collection-image-wrap {
   position: relative;
   overflow: hidden;
@@ -66,30 +65,61 @@
 
 .collection-image {
   width: 100%;
-  height: 320px;
+  height: 280px;
   object-fit: cover;
   display: block;
 }
 
+/* BUTTON INSIDE IMAGE - BOTTOM OVERLAY */
 .collection-cart-btn {
   position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: black;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+
+  background: rgba(0, 0, 0, 0.75);
   color: white;
   border: none;
-  padding: 10px 18px;
+
+  padding: 12px 0;
+
+  font-size: 12px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
   cursor: pointer;
-  border-radius: 6px;
+
   opacity: 0;
-  transition: 0.3s;
+  transform: translateY(100%);
+  transition: all 0.25s ease;
 }
 
+/* show button on hover of image */
 .collection-image-wrap:hover .collection-cart-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* hover effect */
+.collection-cart-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+
+/* optional: show on parent hover (recommended UX) */
+.collection-card:hover .collection-cart-btn {
   opacity: 1;
 }
 
+/* disabled state consistency */
+.collection-cart-btn:disabled {
+  background: #aaa;
+  border-color: #aaa;
+  cursor: not-allowed;
+  opacity: 1;
+}
 .collection-info {
   padding: 14px 6px;
 }

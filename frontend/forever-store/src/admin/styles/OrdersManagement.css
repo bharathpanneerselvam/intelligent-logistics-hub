@@ -1,0 +1,92 @@
+.dashboard-container {
+  padding: 0px;
+  background: #f4f7fb;
+  min-height: 100vh;
+}
+
+.dashboard-container h2 {
+  margin-bottom: 20px;
+  color: #1e1e1e;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.forecast-table thead {
+  background: #1e1e1e;
+  color: white;
+}
+
+.forecast-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.forecast-table td {
+  padding: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+  font-size: 14px;
+}
+
+.forecast-table tbody tr:hover {
+  background: #f9fafb;
+  transition: 0.2s ease;
+}
+
+.forecast-table button {
+  border: none;
+  padding: 8px 14px;
+  margin-right: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.forecast-table button:first-child {
+  background: #1e1e1e;
+  color: white;
+}
+
+.forecast-table button:first-child:hover {
+  background: #3d3232;
+}
+
+.forecast-table button:last-child {
+  background: #16a34a;
+  color: white;
+}
+
+.forecast-table button:last-child:hover {
+  background: #15803d;
+}
+
+@media (max-width: 768px) {
+
+  .dashboard-container {
+    padding: 15px;
+  }
+
+  .forecast-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .forecast-table th,
+  .forecast-table td {
+    padding: 12px;
+  }
+}
