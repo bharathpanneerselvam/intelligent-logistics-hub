@@ -4,8 +4,7 @@ import pickle
 from tensorflow.keras.models import load_model
 
 WINDOW_SIZE = 6
-
-# global variables
+ 
 lstm_model = None
 scaler = None
 
@@ -52,8 +51,7 @@ def predict(last_6_months):
     data_scaled = scaler.transform(
         data
     ).flatten()
-
-    # FIRST MONTH
+ 
     X1 = data_scaled.reshape(
         1,
         WINDOW_SIZE,
@@ -73,8 +71,7 @@ def predict(last_6_months):
         float(prediction1[0][0]),
         2
     )
-
-    # SECOND MONTH
+ 
     second_input = np.append(
         data_scaled[1:],
         prediction1_scaled[0][0]

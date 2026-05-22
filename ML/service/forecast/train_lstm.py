@@ -33,7 +33,7 @@ def load_and_clean_data():
 
     df = pd.read_csv(file_path)
 
-    # revenue = amount
+   
     revenue = (df['quantity'] * df['price']).values.astype(float)
 
     return revenue
